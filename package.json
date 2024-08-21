@@ -1,12 +1,12 @@
 {
     "name": "igestant-api",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "",
     "main": "index.js",
     "scripts": {
         "test": "jest --passWithNoTests --watch --silent --runInBand",
         "test:unit": "npm test -- --watch -c jest.unit.config.js",
-        "test:integration": "npm test -- --wath -c jest.integration.config.js",
+        "test:integration": "npm test -- --watch -c jest.integration.config.js",
         "test:verbose": "jest --passWithNoTests",
         "test:staged": "jest --findRelatedTests",
         "test:ci": "npm test -- --coverage",
