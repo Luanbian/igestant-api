@@ -31,8 +31,8 @@ app.get('/', (_req, res) => {
     } as APIResponse<APIEcho>);
 });
 
-app.listen(EXPRESS_PORT, () => {
+const server = app.listen(EXPRESS_PORT, () => {
     logger(`Server started on port ${EXPRESS_PORT}`);
 });
 
-export { app };
+export { app, server };
