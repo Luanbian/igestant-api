@@ -1,15 +1,15 @@
 {
     "name": "igestant-api",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "",
     "main": "index.js",
     "scripts": {
         "test": "jest --passWithNoTests --watch --silent --runInBand",
         "test:unit": "npm test -- --watch -c jest.unit.config.js",
         "test:integration": "npm test -- --watch -c jest.integration.config.js",
-        "test:ci": "jest --coverage",
+        "test:ci": "jest --passWithNoTests --coverage",
         "test:verbose": "jest --passWithNoTests",
-        "test:staged": "jest --findRelatedTests",
+        "test:staged": "jest --passWithNoTests --findRelatedTests",
         "start": "node src/index.js",
         "dev": "nodemon src/index.ts",
         "lint": "eslint --fix src/**/*.ts",
@@ -17,8 +17,12 @@
         "prepare": "husky"
     },
     "devDependencies": {
+        "@types/cors": "^2.8.17",
+        "@types/debug": "^4.1.12",
+        "@types/express": "^4.17.21",
         "@types/jest": "^29.5.12",
         "@types/node": "^22.5.0",
+        "@types/uuid": "^10.0.0",
         "@typescript-eslint/eslint-plugin": "^8.2.0",
         "@typescript-eslint/parser": "^8.2.0",
         "eslint": "^8.54.0",
@@ -33,5 +37,12 @@
         "ts-jest": "^29.2.4",
         "ts-node": "^10.9.2",
         "typescript": "^5.5.4"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dayjs": "^1.11.13",
+        "debug": "^4.3.6",
+        "express": "^4.19.2",
+        "uuid": "^10.0.0"
     }
 }
