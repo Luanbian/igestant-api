@@ -1,15 +1,15 @@
 {
     "name": "igestant-api",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "",
     "main": "index.js",
     "scripts": {
         "test": "jest --passWithNoTests --watch --silent --runInBand",
         "test:unit": "npm test -- --watch -c jest.unit.config.js",
         "test:integration": "npm test -- --watch -c jest.integration.config.js",
+        "test:ci": "jest --coverage",
         "test:verbose": "jest --passWithNoTests",
         "test:staged": "jest --findRelatedTests",
-        "test:ci": "npm test -- --coverage",
         "start": "node src/index.js",
         "dev": "nodemon src/index.ts",
         "lint": "eslint --fix src/**/*.ts",
