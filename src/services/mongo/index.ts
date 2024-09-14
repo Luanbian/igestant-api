@@ -31,4 +31,4 @@ const getDb = () => {
     return status.db;
 };
 
-export { getDb, client, connect };
+export { getDb, client, connect, status };
