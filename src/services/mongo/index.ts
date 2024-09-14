@@ -13,7 +13,7 @@ const status: {
 
 const connect = async () => {
     try {
-        logger(`Connecting to MongoDB in: ${MONGO_URL}`);
+        logger('Connecting to MongoDB in %0', MONGO_URL);
         await client.connect();
         status.db = client.db(MONGO_DB);
         logger('Connected to MongoDB');
