@@ -19,6 +19,7 @@ const connect = async () => {
         logger('Connected to MongoDB');
     } catch (err) {
         logger('Error connecting to MongoDB: %0', err);
+        throw new Error(`Error connecting to MongoDB ${err}`);
     }
 };
 

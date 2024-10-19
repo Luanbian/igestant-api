@@ -1,8 +1,15 @@
 npm run lint && \
-npm version patch --no-git-tag-version && \
-git add package.json package-lock.json
-
 modified_files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(ts)$')
 if [ -n "$modified_files" ]; then
   npx jest --passWithNoTests --findRelatedTests $modified_files --runInBand --detectOpenHandles
+  if [ $? -eq 0 ]; then
+    npm version patch --no-git-tag-version && \
+    git add package.json package-lock.json
+  else
+    echo "Tests failed. Aborting commit."
+    exit 1
+  fi
+else
+  npm version patch --no-git-tag-version && \
+  git add package.json package-lock.json
 fi

@@ -1,20 +1,30 @@
-/* eslint-disable global-require */
-import { client, connect, getDb, status } from '.';
+import { client, status, getDb, connect } from '.';
 
-describe('MongoDB Service', () => {
+describe('Mongo service', () => {
+    let connection: any;
+
+    beforeAll(async () => {
+        connection = await client.connect();
+    });
     afterAll(async () => {
-        await client.close();
+        await connection.close();
     });
     it('should connect to MongoDB', async () => {
-        await connect();
-        expect(client).toBeDefined();
+        expect(connection).toBeDefined();
     });
-    it('should throw an error if not connected to MongoDB', async () => {
+    it('should return a db object', async () => {
+        const dbObject = getDb();
+        expect(dbObject).toBeDefined();
+    });
+    it('should fail if error connecting to MongoDB', async () => {
+        jest.spyOn(client, 'connect').mockImplementationOnce(async () => {
+            throw new Error('Connection failed');
+        });
+
+        await expect(connect()).rejects.toThrow('Connection failed');
+    });
+    it('should throw an error if getDb is called without a connection', () => {
         status.db = null;
         expect(() => getDb()).toThrow('MongoDB not connected');
-    });
-    it('should return the database object', async () => {
-        status.db = client.db();
-        expect(getDb()).toBeDefined();
     });
 });
