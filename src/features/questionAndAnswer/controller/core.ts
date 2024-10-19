@@ -10,10 +10,31 @@ const route = Router();
 
 route.get('/', async (req, res) => {
     try {
+        const page = parseInt(req.query.page as string, 10) || 1;
+        const limit = parseInt(req.query.limit as string, 10) || 10;
+
+        const query = {};
+
+        const result = await model.findQuestionAndAnswers({
+            query,
+            skip: (page - 1) * limit,
+            limit,
+        });
+
+        const total = await model.countQuestionAndAnswers(query);
+        const totalPages = Math.ceil(total / limit);
+
         res.json({
             code: 'igestant.api.questionAndAnswer.get.success',
             message: 'Question and answer fetched successfully',
             transaction: v6(),
+            data: {
+                data: result,
+                page,
+                limit,
+                total,
+                totalPages,
+            },
         } as APIResponse);
     } catch (error) {
         logger('Reader Question and Answer failed: %0', error);
