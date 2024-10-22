@@ -14,3 +14,5 @@ const logger = debug('core');
 logger('Starting API');
 
 app.use(features.questionAndAnswer.controller.router);
+
+export { app };
