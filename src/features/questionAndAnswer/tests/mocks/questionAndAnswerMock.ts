@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { ObjectId } from 'mongodb';
 
 export const questionAndAnswersMock = [
     {
@@ -20,3 +21,8 @@ export const questionAndAnswersMock = [
         reference: faker.person.fullName(),
     },
 ];
+
+export const insertQuestionAndAnswerMock = {
+    acknowledged: true,
+    insertedId: new ObjectId(),
+};

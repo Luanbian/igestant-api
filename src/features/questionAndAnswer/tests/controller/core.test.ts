@@ -2,7 +2,10 @@ import request from 'supertest';
 import { v6 } from 'uuid';
 import { Server } from 'http';
 import { app } from '../../../../index';
-import { questionAndAnswersMock } from '../mocks/questionAndAnswerMock';
+import {
+    insertQuestionAndAnswerMock,
+    questionAndAnswersMock,
+} from '../mocks/questionAndAnswerMock';
 import { model } from '../..';
 import { transactionMock } from '../mocks/transactionMock';
 
@@ -68,6 +71,47 @@ describe('QuestionAndAnswer Controller', () => {
         expect(response.body).toEqual({
             code: 'igestant.api.questionAndAnswer.get.failed',
             message: `Question and answer fetched failed: ${errorMessage}`,
+            args: errorMessage,
+            transaction: transactionMock,
+        });
+    });
+
+    it('should return 200 status code and insert a new QuestionAndAnswer in db', async () => {
+        mockModel.createQuestionAndAnswer.mockResolvedValue(
+            insertQuestionAndAnswerMock
+        );
+        (v6 as jest.Mock).mockReturnValue(transactionMock);
+
+        const response = await request(app)
+            .post('/questionAndAnswer')
+            .send(questionAndAnswersMock[0]);
+
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({
+            code: 'igestant.api.questionAndAnswer.post.success',
+            message: 'Question and answer created successfully',
+            data: {
+                ...insertQuestionAndAnswerMock,
+                insertedId:
+                    insertQuestionAndAnswerMock.insertedId.toHexString(),
+            },
+            transaction: transactionMock,
+        });
+    });
+
+    it('should return 500 status code and return error message in APIResponse format', async () => {
+        const errorMessage = 'Error to create question and answer';
+        mockModel.createQuestionAndAnswer.mockRejectedValue(errorMessage);
+        (v6 as jest.Mock).mockReturnValue(transactionMock);
+
+        const response = await request(app)
+            .post('/questionAndAnswer')
+            .send(questionAndAnswersMock[0]);
+
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({
+            code: 'igestant.api.questionAndAnswer.post.failed',
+            message: `Question and answer creation failed: ${errorMessage}`,
             args: errorMessage,
             transaction: transactionMock,
         });
