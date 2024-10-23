@@ -8,15 +8,6 @@ export const validateBodyForCreate = async (
     res: Response,
     next: NextFunction
 ) => {
-    if (req.method !== 'POST') {
-        res.status(405).json({
-            code: 'igestant.api.questionAndAnswer.validateBodyForCreate.failed',
-            message: 'Method Not Allowed',
-            transaction: v6(),
-        } as APIResponse);
-        return;
-    }
-
     try {
         req.body = schemaValidationForCreate.parse(req.body);
         next();

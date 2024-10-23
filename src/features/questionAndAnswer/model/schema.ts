@@ -15,5 +15,5 @@ export const questionAndAnswerSchema = z.object({
 
 export type QuestionAndAnswer = z.infer<typeof questionAndAnswerSchema>;
 export type QuestionAndAnswerDocument = QuestionAndAnswer & {
-    id: string | ObjectId;
+    _id?: string | ObjectId;
 };
