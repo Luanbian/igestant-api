@@ -56,4 +56,20 @@ describe('QuestionAndAnswer Controller', () => {
             transaction: transactionMock,
         });
     });
+
+    it('should return 500 status code and return error message in APIResponse format', async () => {
+        const errorMessage = 'Error to fetch question and answer';
+        mockModel.findQuestionAndAnswers.mockRejectedValue(errorMessage);
+        (v6 as jest.Mock).mockReturnValue(transactionMock);
+
+        const response = await request(app).get('/questionAndAnswer');
+
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({
+            code: 'igestant.api.questionAndAnswer.get.failed',
+            message: `Question and answer fetched failed: ${errorMessage}`,
+            args: errorMessage,
+            transaction: transactionMock,
+        });
+    });
 });
