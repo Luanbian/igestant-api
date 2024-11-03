@@ -11,6 +11,9 @@ export const questionAndAnswerSchema = z.object({
     }),
     thumbnail: z.string(),
     reference: z.string(),
+    ageRange: z.string(),
+    categories: z.array(z.string()),
+    gender: z.string(),
 });
 
 export type QuestionAndAnswer = z.infer<typeof questionAndAnswerSchema>;

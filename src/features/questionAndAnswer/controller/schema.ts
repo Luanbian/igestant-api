@@ -8,5 +8,8 @@ export const schemaValidationForCreate = z.object({
     }),
     thumbnail: z.string(),
     reference: z.string(),
+    ageRange: z.string(),
+    categories: z.array(z.string()),
+    gender: z.string(),
     createdAt: z.string().optional().default(new Date().toISOString()),
 });
