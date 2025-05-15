@@ -1,11 +1,12 @@
 import request from 'supertest';
 import { Server } from 'http';
-import { app } from '../../index';
+import { EXPRESS_PORT } from '../../constants/express';
+import { app } from '.';
 
 let server: Server;
 describe('Health Check', () => {
     beforeAll((done) => {
-        server = app.listen(0, () => {
+        server = app.listen(EXPRESS_PORT, () => {
             done();
         });
     });

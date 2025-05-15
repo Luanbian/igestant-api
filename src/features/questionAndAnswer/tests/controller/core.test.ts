@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { v6 } from 'uuid';
 import { Server } from 'http';
-import { app } from '../../../../index';
+import { app } from '../../../../services';
 import {
     insertQuestionAndAnswerMock,
     questionAndAnswersMock,

@@ -1,6 +1,6 @@
 import { Server } from 'http';
 import request from 'supertest';
-import { app } from '../../../../index';
+import { app } from '../../../../services';
 import { questionAndAnswersMock } from '../mocks/questionAndAnswerMock';
 
 describe('QuestionAndAnswer Controller Rules Validation', () => {

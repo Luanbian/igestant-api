@@ -10,8 +10,8 @@
         "test:ci": "jest --passWithNoTests --runInBand --coverage --detectOpenHandles --forceExit",
         "test:verbose": "jest --passWithNoTests --detectOpenHandles",
         "test:related": "jest --passWithNoTests --findRelatedTests --runInBand --detectOpenHandles --forceExit",
-        "start": "node src/index.js",
-        "dev": "nodemon src/index.ts",
+        "start": "DEBUG=core:*,services:*,features:* node src/index.js",
+        "dev": "DEBUG=core:*,services:*,features:* nodemon src/index.ts",
         "lint": "eslint --fix src/**/*.ts",
         "format": "prettier --write src/**/*.ts package.json",
         "prepare": "husky"
